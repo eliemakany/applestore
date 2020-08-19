@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Erreur' %}
+
+{% block body %}
+
+    <div class="jumbotron jumbotron-fluid rounded">
+        <div class="container">
+            <h1 class="display-4">Oops - Erreur {{ status_code }}</h1>
+            <p class="lead">Une erreur s'est produite : <strong>{{ status_text }}</strong> <a href="{{ path('app_home') }}">+ Ajouter une variété</a></p>
+        </div>
+    </div>
+
+{% endblock %}

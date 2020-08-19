@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Nouvelle catégorie' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Nouvel utilisateur</h1>
+
+                <p class="text-muted border p-2 border-light rounded callout">Les utilisateurs avec le role administrateur peuvent créer et gérer les autres utilisateurs</p>
+
+            {{ include('users/_form.html.twig', {'submitButtonText' : 'Ajouter'}) }}
+        </div>
+    </div>
+
+{% endblock %}

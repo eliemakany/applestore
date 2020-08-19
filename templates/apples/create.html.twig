@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Nouvelle pomme' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Ajouter une nouvelle pomme</h1>
+
+            {{ include('apples/_form.html.twig', {'submitButtonText' : 'Ajouter'}) }}
+        </div>
+    </div>
+
+{% endblock %}

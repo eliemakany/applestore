@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title apple.name %}
+
+{% block body %}
+
+    <article>
+        <h1>{{ apple.name }}</h1>
+        <p>{{ apple.description }}</p>
+        <p>{{ apple.origin }}</p>
+    </article>
+
+    <p><a href="{{ path('app_apples') }}">Retour</a></p>
+    <p><a href="{{ path('app_apples_edit', {id: apple.id}) }}">Modifier</a></p>
+    <p><a href="#" onclick='event.preventDefault(); confirm("Êtes-vous sûr de supprimer ?") && document.getElementById("js-delete-apple").submit();'>Supprimer</a></p>
+
+    <form id="js-delete-apple" action="{{ path('app_apples_delete', {id: apple.id}) }}" method="post" style="display: none;">
+        <input type="hidden" name="_token" value="{{ csrf_token(apple.id) }}">
+        <input type="hidden" name="_method" value="DELETE">
+    </form>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des tags' %}
+
+{% block body %}
+
+
+    {% if (tags|length > 0) %}
+
+        <div class="d-flex justify-content-between border-bottom mb-4">
+            <h1><i class="fas fa-tag"></i> Gestion des tags <span class="badge badge-info">{{ pluralize(tags|length, 'Tag', 'Tags')}}</span></h1>
+
+        </div>
+
+
+        <p class="text-muted border p-2 border-light rounded callout">Les tags permettent de regrouper vos pommes par caractéristiques <em>(couleur, forme, texture, composition...)</em>. Ils sont visibles sur le site public.</p>
+        <p class="float-right"><a class="btn btn-secondary" href="{{ path('app_tags_create') }}"><i class="fas fa-plus-circle"></i> Ajouter un tag</a></p>
+        <table class="table table-striped show-alert">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th class="col-7">Pommes</th>
+                    <th class="col-1"></th>
+                    <th class="col-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for tag in tags %}
+
+                <tr>
+                    <td>{{ tag.name }}</td>
+                    <td class="col-7">{{ tag.apples|length }}</td>
+                    <td class="col-1">
+                        <a href="{{ path('app_tags_edit', {id:tag.id}) }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td class="col-1">
+                        <form onsubmit='return confirm("Êtes-vous sûr de supprimer ?")' id="js-delete-category-{{ tag.id }}" action="{{ path('app_tags_delete', {id: tag.id}) }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token(tag.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% else %}
+
+        <div class="jumbotron jumbotron-fluid rounded">
+            <div class="container">
+                <h1 class="display-4">Aucun tag disponible</h1>
+                <p class="lead">Les catégories vous permettent de caractériser vos pommes. <a href="{{ path('app_tags_create') }}">+ Ajouter un tag</a></p>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

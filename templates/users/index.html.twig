@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des catégories' %}
+
+{% block body %}
+
+
+    {% if (users|length > 0) %}
+
+        <h1>Gestion des utilisateurs</h1>
+        <p class="lead">{{ pluralize(users|length, 'Utilisateur', 'Utilisateurs')}}</p>
+        <p class="text-right"><a class="btn btn-secondary" href="{{ path('app_users_create') }}">Créer une nouvel utilisateur</a></p>
+        <table class="table table-striped show-alert">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">E-mails</th>
+                <th scope="col">Role</th>
+                <th class="text-center" scope="col">Pommes</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for user in users %}
+
+                <tr>
+                    <th scope="row">{{ user.lastName }}</th>
+                    <th scope="row">{{ user.firstName }}</th>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                            {{ role }}{{ not loop.last ? ', ' }}
+                        {% endfor %}
+                    </td>
+                    <td class="text-center"><span class="badge badge-info">{{ user.apples|length }}</span></td>
+                    <td>
+                        <a href="{{ path('app_users_edit', {id:user.id}) }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form onsubmit='return confirm("Êtes-vous sûr de supprimer ?")' id="js-delete-category-{{ user.id }}" action="{{ path('app_users_delete', {id: user.id}) }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token(user.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% else %}
+
+        <div class="jumbotron jumbotron-fluid rounded">
+            <div class="container">
+                <h1 class="display-4">Aucune catégorie disponible</h1>
+                <p class="lead">Les catégories vous permettent de regrouper vos pommes. <a href="{{ path('app_categories_create') }}">+ Ajouter une catégorie</a></p>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

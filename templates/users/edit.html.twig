@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Modification de catégorie' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Modifier l'utilisteur : <span class="text-info">#{{ user.firstname }}</span></h1>
+
+            {{ include('users/_formedit.html.twig', {'submitButtonText' : 'Modifier'}) }}
+        </div>
+    </div>
+
+{% endblock %}

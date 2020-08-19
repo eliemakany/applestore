@@ -1,0 +1,27 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+@import "form";
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+/*-- Apple display style --*/
+
+.apple img {
+    transition: 0.3s ease-out;
+
+    &:hover {
+        transform: scale(1.075);
+    }
+}
+
+/*-- Callout --*/
+
+.callout {
+    padding: 1.25rem;
+    border: 1px solid #eee!important;
+    border-left-width: .25rem!important;
+    border-radius: .25rem!important;
+    border-left-color: #5bc0de!important;
+}

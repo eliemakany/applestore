@@ -1,0 +1,64 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des catégories' %}
+
+{% block body %}
+
+
+    {% if (categories|length > 0) %}
+
+        <div class="d-flex justify-content-between border-bottom mb-4">
+            <h1><i class="fas fa-object-group"></i> Gestion des catégories <span class="badge badge-info">{{ pluralize(categories|length, 'Catégorie', 'Catégories')}}</span></h1>
+
+        </div>
+
+        <p class="text-muted border p-2 border-light rounded callout">Les catégories permettent de regrouper vos pommes par type d'utilisation. Elles sont visibles sur le site public.</p>
+
+        <p class="float-right"><a class="btn btn-secondary" href="{{ path('app_categories_create') }}"><i class="fas fa-plus-circle"></i> Créer une nouvelle catégorie</a></p>
+        <table class="table table-striped show-alert">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">Pommes</th>
+                <th class="d-none d-md-block" scope="col">Créée le</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for category in categories %}
+
+                <tr>
+                    <th scope="row">{{ category.name }}</th>
+                    <td>{{ category.description }}</td>
+                    <td>{{ random(5) }}</td>
+                    <td class="d-none d-md-block">{{ category.createdAt|date('d/m/Y') }}</td>
+                    <td>
+                        <a href="{{ path('app_categories_edit', {id:category.id}) }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form onsubmit='return confirm("Êtes-vous sûr de supprimer ?")' id="js-delete-category-{{ category.id }}" action="{{ path('app_categories_delete', {id: category.id}) }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token(category.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% else %}
+
+        <div class="jumbotron jumbotron-fluid rounded">
+            <div class="container">
+                <h1 class="display-4">Aucune catégorie disponible</h1>
+                <p class="lead">Les catégories vous permettent de regrouper vos pommes. <a href="{{ path('app_categories_create') }}">+ Ajouter une catégorie</a></p>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

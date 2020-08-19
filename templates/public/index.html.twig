@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Apple Store : toutes les variétés de pommes' %}
+
+{% block body %}
+
+    {% if (apples|length > 0) %}
+
+        <div class="mb-5 mt-5 text-center">
+            <h1 class="display-4">La pomme dans tous ses états</h1>
+            <p class="lead">Découvrez plusieurs variétés de pommes classées par catégories et par caractéristiques</p>
+            <p class="display-4"><span class="badge badge-secondary">{{ pluralize(apples|length, 'Pomme disponible', 'Pommes disponibles')}}</span></p>
+        </div>
+
+
+        {% for row in apples|batch(3) %}
+            <div class="row mb-5">
+                {% for apple in row %}
+
+                    <div class="col-md-4 mb-3">
+                        <article class="apple bg-white rounded shadow">
+                            <div class="mw-100 rounded-top overflow-hidden">
+                                <a href="{{ path('app_apples_show', {id:apple.id}) }}">
+                                    <img class="w-100" src="{{ (apple.image ? vich_uploader_asset(apple) : asset('images/placeholder.png')) |imagine_filter('squared_thumbnail_medium') }}" alt="{{ apple.name }}" />
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h2 class="h5"><a class="text-secondary" href="{{ path('app_apples_show', {id:apple.id}) }}">{{ apple.name }}</a></h2>
+                                <p class="text-muted"><small>Posté le <strong>{{ apple.createdAt|date('d/m/Y') }}</strong></small></p>
+                            </div>
+                        </article>
+                    </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% else %}
+
+        <div class="jumbotron jumbotron-fluid rounded">
+            <div class="container">
+                <h1 class="display-4">Votre Apple Store est vide</h1>
+                <p class="lead">Aucune variété de pomme n'est disponible pour le moment.</p>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

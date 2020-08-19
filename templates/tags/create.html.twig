@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Nouveau tag' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Nouveau tag</h1>
+
+                <p class="text-muted border p-2 border-light rounded callout">Les tags permettent de regrouper vos pommes par caractéristiques <em>(couleur, forme, texture, composition...)</em>. Ils sont visibles sur le site public.</p>
+
+            {{ include('tags/_form.html.twig', {'submitButtonText' : 'Ajouter'}) }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.roles) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+<input type="submit" class="btn btn-primary btn-block btn-lg shadow" value="{{ submitButtonText }}" formnovalidate />
+{{ form_end(form) }}

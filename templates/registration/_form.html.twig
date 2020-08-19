@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.lastName) }}
+        </div>
+    </div>
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary btn-block btn-lg shadow" value="{{ submitButtonText }}" formnovalidate />
+    </div>
+
+    {{ form_row(form.agreeTerms) }}
+{{ form_end(form) }}

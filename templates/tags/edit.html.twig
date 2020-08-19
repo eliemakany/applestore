@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Modification de tag' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Modifier le tag <span class="text-info">#{{ tag.name }}</span></h1>
+
+            {{ include('tags/_form.html.twig', {'submitButtonText' : 'Modifier'}) }}
+        </div>
+    </div>
+
+{% endblock %}

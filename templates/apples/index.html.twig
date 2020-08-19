@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des pommes' %}
+
+{% block body %}
+
+
+    {% if (apples|length > 0) %}
+
+        <h1>{{ pluralize(apples|length, 'Pomme', 'Pommes')}}</h1>
+
+        {% for row in apples|batch(3) %}
+            <div class="row mb-5">
+                {% for apple in row %}
+
+                    <div class="col-md-4">
+                        <article class="apple bg-white rounded shadow">
+                            <div class="mw-100 rounded-top overflow-hidden">
+                                <a href="{{ path('app_apples_show', {id:apple.id}) }}">
+                                    <img class="w-100" src="{{ (apple.image ? vich_uploader_asset(apple) : asset('images/placeholder.png')) |imagine_filter('squared_thumbnail_medium') }}" alt="{{ apple.name }}" />
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h2 class="h5"><a class="text-secondary" href="{{ path('app_apples_show', {id:apple.id}) }}">{{ apple.name }}</a></h2>
+                                <p class="text-muted"><small>Posté le <strong>{{ apple.createdAt|date('d/m/Y') }}</strong></small></p>
+                            </div>
+                        </article>
+                    </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% else %}
+
+        <div class="jumbotron jumbotron-fluid rounded">
+            <div class="container">
+                <h1 class="display-4">Votre Apple Store est vide</h1>
+                <p class="lead">Aucune variété de pomme n'est disponible pour le moment. <a href="{{ path('app_apples_create') }}">+ Ajouter une variété</a></p>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
