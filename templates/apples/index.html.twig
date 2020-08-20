@@ -7,7 +7,11 @@
 
     {% if (apples|length > 0) %}
 
-        <h1>{{ pluralize(apples|length, 'Pomme', 'Pommes')}}</h1>
+        <div class="d-flex justify-content-between border-bottom mb-4">
+            <h1><i class="fas fa-apple-alt"></i> Gestion des pommes <span class="badge badge-info">{{ pluralize(apples|length, 'Pomme', 'Pommes')}}</span></h1>
+        </div>
+
+        <p class=""><a class="btn btn-secondary" href="{{ path('app_apples_create') }}"><i class="fas fa-plus-circle"></i> Ajouter une nouvelle pomme</a></p>
 
         {% for row in apples|batch(3) %}
             <div class="row mb-5">
@@ -23,6 +27,11 @@
                             <div class="p-3">
                                 <h2 class="h5"><a class="text-secondary" href="{{ path('app_apples_show', {id:apple.id}) }}">{{ apple.name }}</a></h2>
                                 <p class="text-muted"><small>Posté le <strong>{{ apple.createdAt|date('d/m/Y') }}</strong></small></p>
+                                {{ include('apples/_applemetadata.html.twig', {'apple' : apple}) }}
+                                <p>
+                                    <a class="btn btn-sm btn-secondary" href="{{ path('app_apples_edit', {id: apple.id}) }}">Modifier</a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="#" onclick='event.preventDefault(); confirm("Êtes-vous sûr de supprimer ?") && document.getElementById("js-delete-apple").submit();'>Supprimer</a>
+                                </p>
                             </div>
                         </article>
                     </div>

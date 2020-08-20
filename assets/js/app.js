@@ -7,11 +7,16 @@
 
 // CSS
 import '../css/app.scss';
+import 'select2/dist/css/select2.min.css'
 
 // JS
 import $ from 'jquery'
 import 'popper.js';
 import 'bootstrap';
+import 'select2/dist/js/select2.min'
+
+window.jQuery = $;
+window.$ = $;
 
 // Input type file management for apple creation
 
@@ -19,6 +24,10 @@ $('.custom-file-input').on('change', function (e) {
     var input = e.currentTarget;
     $(input).parent().find('.custom-file-label').html(input.files[0].name);
 });
+
+// Select 2
+
+$('.tag').select2();
 
 // CKeditor integration
 

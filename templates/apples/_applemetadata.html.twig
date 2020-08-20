@@ -1,0 +1,6 @@
+<p>Catégorie : <span class="badge badge-info">{{ apple.category.name }}</span></p>
+<p>Tags:
+    {% for tag in apple.tags %}
+        <small><span class="text-info">{{ tag.name }}{{ not loop.last ? ', ' }}</span></small>
+    {% endfor %}
+</p>

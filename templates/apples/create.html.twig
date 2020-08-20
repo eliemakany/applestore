@@ -6,6 +6,8 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
+            {{ include('layouts/_navigationback.html.twig') }}
+
             <h1>Ajouter une nouvelle pomme</h1>
 
             {{ include('apples/_form.html.twig', {'submitButtonText' : 'Ajouter'}) }}

@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title user.firstName %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-md-6 mx-auto">
+
+            <h1>Votre profil</h1>
+
+            <div class="card">
+                <div class="card-header">
+                    Informations personnelles
+                </div>
+                <div class="card-body">
+                    <p>{{ user.firstName }} <strong>{{ user.lastName }}</strong></p>
+                    <p class="text-info">{{ user.email }}</p>
+                    <p><a class="btn btn-secondary" href="{{ path('app_profile_edit', {id:user.id}) }}">Modifier</a></p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    Votre contribution : <span class="badge badge-info">{{ pluralize(user.apples|length, 'Pomme', 'Pommes')}}</span>
+                </div>
+                <div class="card-body">
+                    {% for row in user.apples|batch(2) %}
+                        <div class="row mb-5">
+                            {% for apple in row %}
+
+                                <div class="col-md-6 mb-sm-3">
+                                    <article class="apple bg-white rounded shadow">
+                                        <div class="mw-100 rounded-top overflow-hidden">
+                                            <a href="{{ path('app_apples_show', {id:apple.id}) }}">
+                                                <img class="w-100" src="{{ (apple.image ? vich_uploader_asset(apple) : asset('images/placeholder.png')) |imagine_filter('squared_thumbnail_medium') }}" alt="{{ apple.name }}" />
+                                            </a>
+                                        </div>
+                                        <div class="p-3">
+                                            <h2 class="h5"><a class="text-secondary" href="{{ path('app_apples_show', {id:apple.id}) }}">{{ apple.name }}</a></h2>
+                                        </div>
+                                    </article>
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

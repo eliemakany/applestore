@@ -11,26 +11,19 @@
 
             <article class="apple bg-white rounded shadow">
                 <div class="mw-100 rounded-top overflow-hidden">
-                    <a href="{{ path('app_apples_edit', {id: apple.id}) }}">
-                        <img class="w-100" src="{{ (apple.image ? vich_uploader_asset(apple) : asset('images/placeholder.png')) |imagine_filter('squared_thumbnail_medium') }}" alt="{{ apple.name }}" />
-                    </a>
+                    <img class="w-100" src="{{ (apple.image ? vich_uploader_asset(apple) : asset('images/placeholder.png')) |imagine_filter('squared_thumbnail_medium') }}" alt="{{ apple.name }}" />
                 </div>
                 <div class="p-3">
-                    <h2 class="h5"><a class="text-secondary" href="{{ path('app_apples_edit', {id: apple.id}) }}">{{ apple.name }}</a></h2>
+                    <h2 class="h5">{{ apple.name }}</h2>
                     <p class="text-muted"><small>Posté le <strong>{{ apple.createdAt|date('d/m/Y') }}</strong> par <strong class="text-info">{{ apple.user.firstName }}</strong></small></p>
                     <div>
                         {{ apple.description|raw  }}
                     </div>
                     <p>Origine : <span class="badge badge-info">{{ apple.origin }}</span></p>
                     {{ include('apples/_applemetadata.html.twig', {'apple' : apple}) }}
-                    <p>
-                        <a class="btn btn-sm btn-secondary" href="{{ path('app_apples_edit', {id: apple.id}) }}">Modifier</a>
-                        <a class="btn btn-sm btn-outline-secondary" href="#" onclick='event.preventDefault(); confirm("Êtes-vous sûr de supprimer ?") && document.getElementById("js-delete-apple").submit();'>Supprimer</a>
-                    </p>
                 </div>
             </article>
         </div>
     </div>
 
-    {{ include('apples/_formdelete.html.twig') }}
 {% endblock %}

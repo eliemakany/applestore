@@ -32,6 +32,10 @@
                             </li>
 
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_apples') }}">Pommes</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_users_list') }}">Utilisateurs</a>
                             </li>
 
@@ -47,8 +51,8 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown-myaccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> Mon compte</a>
                                 <div class="dropdown-menu" aria-labelledby="">
+                                    <a class="dropdown-item" href="{{ path('app_profile_show', {id:app.user.id}) }}"><i class="far fa-user"></i> Profil</a>
                                     <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-user"></i> Profil</a>
                                 </div>
                             </li>
 

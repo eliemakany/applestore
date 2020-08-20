@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Apple;
+use App\Entity\AppleSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,38 @@ class AppleRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Apple::class);
+    }
+
+    /**
+     * @param AppleSearch $search
+     */
+    public function findAppleFiltered(AppleSearch $search)
+    {
+        $query = $this->getApplesQuery();
+
+
+        if($search->getCategory())
+        {
+            $query->andWhere('a.category = :categoryId');
+            $query->setParameter('categoryId', $search->getCategory());
+        }
+
+        if($search->getOrigin())
+        {
+            $query->andWhere('a.origin = :origin');
+            $query->setParameter('origin', $search->getOrigin());
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    private function getApplesQuery(): QueryBuilder
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC');
     }
 
     // /**

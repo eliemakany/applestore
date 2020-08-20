@@ -1,0 +1,3 @@
+#!/bin/sh
+npm run build
+rsync -av -e 'ssh -p 5022' ./ pix3l@world-317.fr.planethoster.net:/home/pix3l/applestore.pix3l.fr --include=public/build --include=public/.htaccess --exclude-from=.gitignore --exclude=".*"

@@ -6,6 +6,8 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
+            {{ include('layouts/_navigationback.html.twig') }}
+
             <h1>Modifier la catégorie <span class="text-info">#{{ apple.name }}</span></h1>
 
             {{ include('categories/_form.html.twig', {'submitButtonText' : 'Modifier'}) }}
